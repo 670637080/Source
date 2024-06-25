@@ -11,8 +11,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Create Source directory  
+
+      - name: Create Source directory (if not exists)
         run: mkdir -p Source
+  
       - name: Download files
         run: |
           curl -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" -o ./Source/Live.txt https://gitee.com/Qmyr/Qmyr/raw/master/Source/Live.txt
