@@ -1,0 +1,26 @@
+name: Update Config
+  
+on:  
+  workflow_dispatch:  
+  schedule:  
+    - cron: '0 12 * * *'  
+  
+jobs:  
+  update-config:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Checkout repository  
+        uses: actions/checkout@v2  
+  
+      - name: Download Config.json  
+        run: |  
+          wget -q -O Config.json \  
+            --header="User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" \  
+            https://gitee.com/Qmyr/Qmyr/raw/master/Source/Config.json  
+   
+      - name: Commit and Push changes  
+        uses: stefanzweifel/git-auto-commit-action@v4  
+        with:  
+          commit_message: Update Config.json from Gitee  
+          branch: ${{ github.ref_name }}  
+          file_pattern: Config.json
